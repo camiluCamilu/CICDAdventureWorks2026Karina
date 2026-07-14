@@ -141,7 +141,7 @@ jobs:
               "task_key": "tarea2_notebook2",
               "description": "Ejecuta notebook ntbk_2",
               "notebook_task": {
-                "notebook_path": "/test/scripts/main/test01",
+                "notebook_path": "/test/scripts/main/test02",
                 "source": "WORKSPACE"
               },
               "existing_cluster_id": "$CLUSTER_ID",
