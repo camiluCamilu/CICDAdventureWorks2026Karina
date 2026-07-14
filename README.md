@@ -1,2 +1,94 @@
 # CICDAdventureWorks2026Karina
-Este repositorio es  repositorio de la clase de databricks de Karina Morales del proyecto de AdventureWorks.
+
+## Descripción del Proyecto
+
+Este proyecto tiene como objetivo aprender y aplicar conceptos fundamentales de **Databricks** utilizando el conjunto de datos de **Adventure Works**, una empresa ficticia dedicada a la fabricación y comercialización de bicicletas, componentes y accesorios deportivos.
+
+##Arquitectura To BE
+
+A través de este caso de estudio, se explorarán las capacidades de **Databricks** para la ingesta, transformación, consulta y análisis de datos, siguiendo un enfoque práctico orientado a escenarios reales de negocio.
+
+<img width="1268" height="749" alt="image" src="https://github.com/user-attachments/assets/59ab1f4b-2e7f-4a8e-9c02-acd8a41d0318" />
+
+
+
+## Objetivos de Aprendizaje
+
+Durante el desarrollo del proyecto se pondrán en práctica conceptos clave de **Databricks**, tales como:
+
+- Creación y administración de notebooks en **Databricks**.
+- Procesamiento de datos con Apache Spark en **Databricks**.
+- Diseño de modelos de datos para análisis de negocio.
+- Creación de métricas e indicadores de ventas.
+- Exploración de datos.
+
+## Modelo de Datos
+
+El proyecto se basa en cuatro tablas principales que representan el proceso de ventas de Adventure Works.
+
+### Customer
+
+Contiene la información de los clientes que realizan compras en la compañía.
+
+### Product
+
+Almacena el catálogo de productos disponibles para la venta.
+
+### SalesOrderHeader
+
+Representa la información general de cada pedido realizado por un cliente.
+
+### SalesOrderDetail
+
+Contiene el detalle de los productos incluidos en cada pedido.
+
+
+## Relaciones del Modelo Operativo
+
+En este diagrama se muestra el modelo entidad relación de adventure works
+
+ <img width="998" height="1155" alt="image" src="https://github.com/user-attachments/assets/8f703dcf-c4f8-4c1c-9e99-4932394caace" />
+
+
+## Casos de Uso en **Databricks**
+
+A partir de estas tablas se pueden desarrollar diferentes ejercicios para fortalecer habilidades en **Databricks**:
+
+- Carga de datos en formato csv.
+- Creación de tablas y vistas en **Databricks SQL**.
+- Implementación de procesos ETL utilizando Azure Data Factory.
+- Análisis de ventas por producto y cliente.
+- Construcción de métricas de negocio.
+- Generación de dashboard analíticos.
+- Exploración y validación de calidad de datos.
+- Modelado de datos para consumo analítico.
+
+
+## Modelo Entidad Relación  **Databricks: Datos Gold**
+
+<img width="386" height="644" alt="image" src="https://github.com/user-attachments/assets/94c2f081-ff53-4f04-a49e-64533c1c027f" />
+
+
+## Preguntas de Negocio
+
+El modelo permite responder preguntas como:
+
+- ¿Cuáles son las ventas totales?
+- ¿Qué productos de acuerdo a su categoría que generan mayores ingresos?
+- ¿Cuáles son los productos más vendidos?
+- ¿Cómo evolucionan las ventas a lo largo del tiempo?
+- ¿Qué tendencias pueden identificarse en el comportamiento de compra?
+
+
+## Tecnologías Utilizadas
+
+- **Databricks**
+- Azure SQL
+- Azure Data Factory
+- Azure Key Vault
+- Databricks
+
+
+## Resultado Esperado
+
+Al finalizar este proyecto, se espera adquirir experiencia práctica en el uso de **Databricks** para la gestión y análisis de datos, utilizando un escenario empresarial realista que permita comprender cómo transformar datos transaccionales en información valiosa para la toma de decisiones.
