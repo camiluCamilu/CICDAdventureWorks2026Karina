@@ -1,0 +1,130 @@
+name: Dynamic Databricks Notebook Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Install jq & curl
+        run: sudo apt-get update && sudo apt-get install -y jq curl
+      
+      - name: Export multiple notebooks (raw)
+        run: |
+          ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
+          ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
+          NOTEBOOK_BASE="/Workspace/Users/lugos3047_outlook.com#ext#@lugos3047outlook.onmicrosoft.com/CICDAdventureWorks2026Karina"
+          NOTEBOOKS=("test01")
+          mkdir -p notebooks_to_deploy
+          for nb in "${NOTEBOOKS[@]}"; do
+            echo "Exportando $nb en modo raw..."
+            curl -s -X GET \
+              -H "Authorization: Bearer $ORIGIN_TOKEN" \
+              "$ORIGIN_HOST/api/2.0/workspace/export?path=$NOTEBOOK_BASE/$nb&format=SOURCE&direct_download=true" \
+              --output "notebooks_to_deploy/$nb.py"
+          done
+      
+      - name: Deploy notebooks to Destination Workspace
+        run: |
+          DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
+          DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
+          DEST_BASE="/test/scripts/main"
+          for file in notebooks_to_deploy/*.py; do
+            name=$(basename "$file" .py)
+            dest_path="$DEST_BASE/$name"
+            echo "Creando carpeta $DEST_BASE si no existe..."
+            curl -s -X POST \
+              -H "Authorization: Bearer $DEST_TOKEN" \
+              -H "Content-Type: application/json" \
+              -d "{\"path\":\"$DEST_BASE\"}" \
+              "$DEST_HOST/api/2.0/workspace/mkdirs"
+            echo "Importando $file → $dest_path"
+            curl -s -X POST \
+              -H "Authorization: Bearer $DEST_TOKEN" \
+              -H "Content-Type: multipart/form-data" \
+              -F "path=$dest_path" \
+              -F "format=SOURCE" \
+              -F "language=PYTHON" \
+              -F "overwrite=true" \
+              -F "content=@$file" \
+              "$DEST_HOST/api/2.0/workspace/import"
+          done
+      
+      - name: Get existing cluster ID
+        run: |
+          DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
+          DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
+          CLUSTER_NAME="cluster_SD"
+          
+          echo "Buscando cluster: $CLUSTER_NAME"
+          clusters_response=$(curl -s -X GET \
+            -H "Authorization: Bearer $DEST_TOKEN" \
+            "$DEST_HOST/api/2.0/clusters/list")
+          
+          cluster_id=$(echo "$clusters_response" | jq -r --arg name "$CLUSTER_NAME" '.clusters[]? | select(.cluster_name == $name) | .cluster_id')
+          
+          if [ "$cluster_id" != "" ] && [ "$cluster_id" != "null" ]; then
+            echo "✅ Cluster encontrado: $CLUSTER_NAME (ID: $cluster_id)"
+            echo "CLUSTER_ID=$cluster_id" >> $GITHUB_ENV
+          else
+            echo "❌ Cluster no encontrado: $CLUSTER_NAME"
+            exit 1
+          fi
+      
+      - name: Create Databricks Workflow
+        run: |
+          DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
+          DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
+          CLUSTER_ID="${{ env.CLUSTER_ID }}"
+          
+          echo "Creando workflow con cluster ID: $CLUSTER_ID"
+          
+          cat > workflow_config.json << 'JSONEOF'
+          {
+            "name": "WF_ADB",
+            "format": "MULTI_TASK",
+            "tasks": [
+              {
+                "task_key": "tarea1_notebook1",
+                "description": "Ejecuta notebook test01",
+                "notebook_task": {
+                  "notebook_path": "/test/scripts/main/test01",
+                  "source": "WORKSPACE"
+                },
+                "existing_cluster_id": "$CLUSTER_ID",
+                "timeout_seconds": 3600,
+                "max_retries": 2
+              }
+            ],
+            "timeout_seconds": 7200,
+            "max_concurrent_runs": 1
+          }
+          JSONEOF
+          
+          sed -i "s|\$CLUSTER_ID|$CLUSTER_ID|g" workflow_config.json
+          
+          curl -s -X POST \
+            -H "Authorization: Bearer $DEST_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d @workflow_config.json \
+            "$DEST_HOST/api/2.1/jobs/create"
+          
+          echo "✅ Workflow creado"
+      
+      - name: Cleanup
+        run: |
+          rm -rf notebooks_to_deploy
+          rm -f workflow_config.json
+      
+      - name: Success Message
+        run: |
+          echo "🎉 Despliegue completado!"
+          echo "✅ Notebooks: desplegados"
+          echo "✅ Workflow WF_ADB: creado"
