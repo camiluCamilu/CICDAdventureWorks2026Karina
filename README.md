@@ -16,7 +16,7 @@ A través de este caso de estudio, se explorarán las capacidades de **Databrick
 - Azure SQL
 - Azure Data Factory
 - Azure Key Vault
-- Databricks
+
 
 
 ## Objetivos de Aprendizaje
