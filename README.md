@@ -8,7 +8,8 @@ Este proyecto tiene como objetivo aprender y aplicar conceptos fundamentales de 
 
 A través de este caso de estudio, se explorarán las capacidades de **Databricks** para la ingesta, transformación, consulta y análisis de datos, siguiendo un enfoque práctico orientado a escenarios reales de negocio.
 
-<img width="1268" height="749" alt="image" src="https://github.com/user-attachments/assets/59ab1f4b-2e7f-4a8e-9c02-acd8a41d0318" />
+<img width="969" height="565" alt="image" src="https://github.com/user-attachments/assets/e3a0533b-e38f-48fb-96be-97ea1f1c7f03" />
+
 
 ## Tecnologías Utilizadas
 
@@ -50,11 +51,12 @@ Representa la información general de cada pedido realizado por un cliente.
 Contiene el detalle de los productos incluidos en cada pedido.
 
 
-## Relaciones del Modelo Operativo
+## Modelo Entidad Relación del Modelo Operativo
 
 En este diagrama se muestra el modelo entidad relación de adventure works
 
- <img width="998" height="1155" alt="image" src="https://github.com/user-attachments/assets/8f703dcf-c4f8-4c1c-9e99-4932394caace" />
+<img width="955" height="1051" alt="image" src="https://github.com/user-attachments/assets/a4c86c70-57df-40c2-b925-4ae09d24c53f" />
+
 
 
 ## Casos de Uso en **Databricks**
