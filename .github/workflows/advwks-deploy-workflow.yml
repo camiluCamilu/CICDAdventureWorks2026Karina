@@ -1,4 +1,4 @@
-name: Deploy Databricks Job Pipeline
+name: Deploy Databricks Job Pipeline Adventure Works
 
 on:
   push:
