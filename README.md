@@ -73,11 +73,11 @@ A partir de estas tablas se pueden desarrollar diferentes ejercicios para fortal
 - Modelado de datos para consumo analítico.
 
 
-## Modelo Entidad Relación  **Databricks: Datos Gold**
+## Modelo Entidad Relación Anaílitco 
+Databricks: Datos Gold. Con base en un modelo de datos  OLAP, el diseño analítico  se muestra a continuación:
 
-Con base en un modelo de datos  OLAP, el diseño analítico  se muestra a continuación:
 
-<img width="386" height="644" alt="image" src="https://github.com/user-attachments/assets/94c2f081-ff53-4f04-a49e-64533c1c027f" />
+<img width="608" height="1135" alt="image" src="https://github.com/user-attachments/assets/dbf59da8-6579-4dab-9ff9-2b31587dd308" />
 
 
 
