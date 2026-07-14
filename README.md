@@ -105,16 +105,18 @@ En Producción:
 
 ## Governance y Seguridad
 
-**Roles y Control de Acceso**
+Este proyecto esta basado en dos vertientes principalmente:
+
+**1. Roles y Control de Acceso**
 
 Implementamos RBAC con tres grupos principales:
 
-GrupoPermisosAccesoData Engineers (advwks_DE)CREATE, ALTER, DELETE, SELECTCatálogo completoData Analysts (advwks_DA)SELECT (lectura)Solo GoldData Governance (advwks_DG)SELECT (lectura)Catálogo completo.
+
 
 <img width="630" height="502" alt="image" src="https://github.com/user-attachments/assets/a811a58d-ec41-476c-bd39-a7d0e0e61133" />
 
 
- **Gestión de Secretos — Azure Key Vault**
+ **2. Gestión de Secretos — Azure Key Vault**
 Todos los secretos se almacenan centralizadamente en Azure Key Vault y se accede mediante identidades gestionadas (Managed Identity). 
 
 ## Preguntas de Negocio
