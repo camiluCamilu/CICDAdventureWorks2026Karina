@@ -1,4 +1,4 @@
-name: MEDALLION_PIPELINE_ADVENTUREWORKS
+name: MEDALLION_PIPELINE_ADVENTUREWORKS.
 description: 'Pipeline Medallion completo: Bronze → Silver → Gold con 8 notebooks
   en orden'
 format: MULTI_TASK
