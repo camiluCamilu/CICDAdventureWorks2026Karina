@@ -73,7 +73,8 @@ A partir de estas tablas se pueden desarrollar diferentes ejercicios para fortal
 
 ## Modelo Entidad Relación  **Databricks: Datos Gold**
 
-Con base en un modelo de datos  OLAP, el diseño analítico  se muestra a continuación
+Con base en un modelo de datos  OLAP, el diseño analítico  se muestra a continuación:
+
 <img width="386" height="644" alt="image" src="https://github.com/user-attachments/assets/94c2f081-ff53-4f04-a49e-64533c1c027f" />
 
 
@@ -106,7 +107,10 @@ En Producción:
 
 Implementamos RBAC con tres grupos principales:
 
-GrupoPermisosAccesoData Engineers (advwks_DE)CREATE, ALTER, DELETE, SELECTCatálogo completoData Analysts (advwks_DA)SELECT (lectura)Solo GoldData Governance (advwks_DG)SELECT (lectura)Catálogo completo
+GrupoPermisosAccesoData Engineers (advwks_DE)CREATE, ALTER, DELETE, SELECTCatálogo completoData Analysts (advwks_DA)SELECT (lectura)Solo GoldData Governance (advwks_DG)SELECT (lectura)Catálogo completo.
+
+<img width="630" height="502" alt="image" src="https://github.com/user-attachments/assets/a811a58d-ec41-476c-bd39-a7d0e0e61133" />
+
 
  **Gestión de Secretos — Azure Key Vault**
 Todos los secretos se almacenan centralizadamente en Azure Key Vault y se accede mediante identidades gestionadas (Managed Identity). 
